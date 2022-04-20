@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<sdf version='1.7'>
+  <world name='default'>
+    <light name='user_directional_light_0' type='directional'>
+      <pose>0 0 1 0 0 0</pose>
+    </light>
+    <model name='camera'>
+      <static>true</static>
+      <pose>3.5 2.5 4 -1.570796327 1.570796327 0</pose>
+      <link name='camera_link'>
+        <visual name='visual'>
+          <geometry>
+            <box>
+              <size>0.1 0.1 0.1</size>
+            </box>
+          </geometry>
+        </visual>
+        <sensor name='my_camera' type='camera'>
+          <camera>
+            <save enabled="false">
+              <path>/home/jehon/Development/localization/cam_output</path>
+            </save>
+            <horizontal_fov>1.570796327</horizontal_fov>
+            <image>
+              <width>2592</width>
+              <height>2592</height>
+            </image>
+            <clip>
+              <near>0.1</near>
+              <far>100</far>
+            </clip>
+            <lens>
+              <type>equidistant</type>
+              <scale_to_hfov>false</scale_to_hfov>
+              <intrinsics>
+                <fx>1296</fx>
+                <fy>1296</fy>
+                <cx>1296.5</cx>
+                <cy>1296.5</cy>
+                <s>0</s>
+              </intrinsics>
+            </lens>
+          </camera>
+          <always_on>1</always_on>
+          <update_rate>30.0</update_rate>
+          <visualize>true</visualize>
+          <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+            <camera_name>overhead_cam</camera_name>
+            <hack_baseline>0</hack_baseline>
+            <frame_name>camera_link</frame_name>
+          </plugin>
+        </sensor>
+      </link>
+    </model>
+
+    <!-- Arena tags -->
+    <include>
+      <uri>model://aruco_marker_0</uri>
+      <name>aruco_marker_0</name>
+      <pose>0 0 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://aruco_marker_1</uri>
+      <name>aruco_marker_1</name>
+      <pose>7 0 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://aruco_marker_2</uri>
+      <name>aruco_marker_2</name>
+      <pose>7 5 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://aruco_marker_3</uri>
+      <name>aruco_marker_3</name>
+      <pose>0 5 0 0 0 0</pose>
+    </include>
+
+
+    <!-- Robot tag -->
+    <include>
+      <uri>model://aruco_marker_4</uri>
+      <name>aruco_marker_4</name>
+      <pose>3 3 0 0 0 0.523598776</pose>
+      <plugin name="ground_truth" filename="libgazebo_ros_p3d.so">
+        <frame_name>map</frame_name>
+        <body_name>marker</body_name>
+        <topic_name>ground_truth</topic_name>
+        <update_rate>30.0</update_rate>
+      </plugin>
+    </include>
+  </world>
+</sdf>
