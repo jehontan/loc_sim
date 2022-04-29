@@ -13,12 +13,16 @@ def generate_launch_description():
 
     return LaunchDescription([
         # Gazebo
-        DeclareLaunchArgument('world', default_value=PathJoinSubstitution([FindPackageShare('loc_sim'), 'worlds', 'test.world'])),
+        DeclareLaunchArgument('world', default_value=PathJoinSubstitution([FindPackageShare('loc_sim'), 'worlds', 'multicam.world'])),
+
         DeclareLaunchArgument('gui', default_value='true',
                               description='Set to "false" to run headless.'),
 
         DeclareLaunchArgument('server', default_value='true',
                               description='Set to "false" not to run gzserver.'),
+
+        DeclareLaunchArgument('config_yaml', default_value=PathJoinSubstitution([FindPackageShare('loc_sim'), 'config', 'default_config.yaml'])),
+
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource([gazebo_ros_share, '/launch', '/gzserver.launch.py']),
             condition=IfCondition(LaunchConfiguration('server')),
@@ -33,6 +37,9 @@ def generate_launch_description():
         Node(
             package='loc_sim',
             executable='localize',
+            parameters=[{
+                'config_yaml': LaunchConfiguration('config_yaml'),
+            }],
         ),
 
         # RViz

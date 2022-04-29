@@ -1,0 +1,46 @@
+---
+cameras:
+  # - topic: '/overhead_cam/image_raw'
+  - topic: '/camera1/image_raw'
+  - topic: '/camera2/image_raw'
+marker_size: 0.1
+roaming_markers:
+  - id: 4
+    topic: 'pose'
+fixed_markers:
+  - id: 0
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    orientation:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  - id: 1
+    position:
+      x: 7.0
+      y: 0.0
+      z: 0.0
+    orientation:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  - id: 2
+    position:
+      x: 7.0
+      y: 5.0
+      z: 0.0
+    orientation:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  - id: 3
+    position:
+      x: 0.0
+      y: 5.0
+      z: 0.0
+    orientation:
+      x: 0.0
+      y: 0.0
+      z: 0.0
