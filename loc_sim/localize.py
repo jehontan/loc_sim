@@ -1,4 +1,3 @@
-from logging.handlers import RotatingFileHandler
 import cv2
 import numpy as np
 import rclpy
@@ -11,8 +10,9 @@ from scipy.spatial.transform import Rotation
 import yaml
 
 # hardcoded parameters, may also read from camera_info
-K = np.array([[1296, 0, 1296.5],[0, 1296,  1296.5],[0 ,0, 1]])
-D = np.zeros((1,4))
+# K = np.array([[1296, 0, 1296.5],[0, 1296,  1296.5],[0 ,0, 1]]) # approx. 5MP square
+K = np.array([[2034.31, 0, 1296.00],[0, 1525.73,  972.00],[0 ,0, 1]]) # Arducam 12MP operating at 5MP@30fps
+D = np.zeros((1,4)) # assume no distortion
 
 def transformation(rvec, tvec):
     T = np.eye(4)
